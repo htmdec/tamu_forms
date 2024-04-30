@@ -1,0 +1,265 @@
+{
+	"definitions": {
+	 "loading": {
+	  "$id": "#/definitions/loading",
+	  "multiple": true,
+	  "properties": {
+	   "Maximum Load Step": {
+		"description": "kip",
+		"type": "number"
+	   }
+	  },
+	  "title": "Step",
+	  "type": "object"
+	 },
+   "date": {
+      "$id": "#/definitions/date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+   }
+	},
+	"description": "Form developed to track homogenization and forging details for the VAM process.",
+	"properties": {
+	 "sampleId": {
+	  "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A",
+	  "format": "custom",
+	  "pattern": "([A-Z]{3}[0-9]{2})_VAM-[A-Z]",
+	  "propertyOrder": 0,
+	  "type": "string"
+	 },
+    "suffix": {
+      "type": "string",
+      "default": "Syn",
+      "options": {
+        "hidden": true
+      }
+    },
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sampleId suffix '_') false}}",
+      "watch": {
+        "sampleId": "root.sampleId",
+        "suffix": "root.suffix"
+      },
+      "propertyOrder": 103,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+	 "Homogenization": {
+	  "properties": {
+	   "Process Overview": {
+		"properties": {
+		 "Start Date": {
+		  "$ref": "#/definitions/date",
+		  "propertyOrder": 0
+		 },
+		 "Finish Date": {
+		  "$ref": "#/definitions/date",
+		  "propertyOrder": 1
+		 },
+		 "Time Spent": {
+		  "description": "HH:MM",
+		  "errorMessage": "Please enter a time in the HH:MM format",
+		  "fieldType": "text",
+		  "format": "custom",
+		  "pattern": "^[0-9]+:[0-5][0-9]$",
+		  "propertyOrder": 2,
+		  "type": "string"
+		 },
+		 "Completed By": {
+		  "type": "string",
+		  "propertyOrder": 3
+		 }
+		},
+		"type": "object",
+		"propertyOrder": 0,
+		"format": "grid"
+	   },
+	   "Thermal Conditions": {
+		"properties": {
+		 "Temperature": {
+		  "propertyOrder": 0,
+		  "description": "°C",
+		  "type": "number"
+		 },
+		 "Duration": {
+		  "propertyOrder": 1,
+		  "description": "hours",
+		  "type": "number"
+		 },
+		 "Cooling Rate": {
+		  "propertyOrder": 2,
+		  "type": "string",
+		  "default": "FC"
+		 },
+		 "Atmosphere": {
+		  "propertyOrder": 3,
+		  "type": "string",
+		  "default": "Ar"
+		 },
+		 "Pressure": {
+		  "propertyOrder": 4,
+		  "type": "number",
+		  "description": "mtorr"
+		 }
+		},
+		"format": "grid",
+		"type": "object",
+		"propertyOrder": 1
+	   },
+	   "Purging Sequence Pressure": {
+		"properties": {
+		 "1": {
+		  "propertyOrder": 0,
+		  "type": "number",
+		  "description": "torr"
+		 },
+		 "2": {
+		  "propertyOrder": 1,
+		  "type": "number",
+		  "description": "torr"
+		 },
+		 "3": {
+		  "propertyOrder": 2,
+		  "type": "number",
+		  "description": "torr"
+		 },
+		 "4": {
+		  "propertyOrder": 3,
+		  "type": "number",
+		  "description": "torr"
+		 }
+		},
+		"format": "grid",
+		"type": "object",
+		"propertyOrder": 2
+	   }
+	  },
+	  "type": "object",
+	  "propertyOrder": 1
+	 },
+	 "Forging": {
+	  "properties": {
+	   "Process Overview": {
+		"properties": {
+		 "Start Date": {
+		  "$ref": "#/definitions/date",
+		  "propertyOrder": 0
+		 },
+		 "Finish Date": {
+		  "$ref": "#/definitions/date",
+		  "propertyOrder": 1
+		 },
+		 "Time Spent": {
+		  "description": "HH:MM",
+		  "errorMessage": "The format must be a time as HH:MM",
+		  "format": "custom",
+		  "pattern": "^[0-9]+:[0-5][0-9]$",
+		  "type": "string",
+		  "propertyOrder": 2
+		 },
+		 "Completed By": {
+		  "type": "string",
+		  "propertyOrder": 3
+		 }
+		},
+		"type": "object",
+		"propertyOrder": 0,
+		"format": "grid"
+	   },
+	   "Ingot Dimensions Before": {
+		"properties": {
+		 "Length": {
+		  "type": "number",
+		  "propertyOrder": 0,
+		  "description": "mm"
+		 },
+		 "Width": {
+		  "type": "number",
+		  "propertyOrder": 1,
+		  "description": "mm"
+		 },
+		 "Thickness": {
+		  "type": "number",
+		  "propertyOrder": 2,
+		  "description": "mm"
+		 }
+		},
+		"type": "object",
+		"propertyOrder": 1,
+		"format": "grid"
+	   },
+	   "Ingot Condition": {
+		"properties": {
+		 "Temperature": {
+		  "propertyOrder": 0,
+		  "description": "°C",
+		  "type": "number"
+		 },
+		 "Soak Time": {
+		  "propertyOrder": 1,
+		  "description": "min",
+		  "type": "number"
+		 }
+		},
+		"type": "object",
+		"format": "grid",
+		"propertyOrder": 2
+	   },
+	   "Press Temperature": {
+		"propertyOrder": 3,
+		"type": "number",
+		"description": "°C"
+	   },
+	   "Maximum Load": {
+		"items": {
+		 "$ref": "#/definitions/loading"
+		},
+		"propertyOrder": 4,
+		"minItems": 1,
+		"type": "array"
+	   },
+	   "Ingot Dimensions After": {
+		"properties": {
+		 "Length": {
+		  "type": "number",
+		  "propertyOrder": 0,
+		  "description": "mm"
+		 },
+		 "Width": {
+		  "type": "number",
+		  "propertyOrder": 1,
+		  "description": "mm"
+		 },
+		 "Thickness": {
+		  "type": "number",
+		  "propertyOrder": 2,
+		  "description": "mm"
+		 },
+		 "Thickness Reduction": {
+		  "type": "number",
+		  "propertyOrder": 3,
+		  "description": "%"
+		 }
+		},
+		"type": "object",
+		"propertyOrder": 5,
+		"format": "grid"
+	   }
+	  },
+	  "type": "object",
+	  "propertyOrder": 2
+	 },
+	 "Notes": {
+	  "type": "string",
+	  "propertyOrder": 3
+	 }
+	},
+	"title": "VAM Processing Details",
+	"type": "object"
+   }

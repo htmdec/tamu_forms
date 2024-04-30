@@ -1,0 +1,158 @@
+{
+  "description": "Form to track the Microhardness characterization details.",
+  "definitions": {
+		"files": {
+			"$id": "files",
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "propertyOrder": 2,
+          "template": "{{tamupath (join sampleId suffix '_') false}}",
+          "options": {
+            "hidden": true
+          },
+          "watch": {
+            "sampleId": "root.sampleId",
+            "suffix": "root.suffix"
+          },
+          "format": "hidden"
+        },
+        "sampleId": {
+          "type": "string",
+          "propertyOrder": 4,
+          "template": "{{sampleId}}",
+          "options": {
+            "hidden": true
+          },
+          "watch": {
+            "sampleId": "root.sampleId"
+          },
+          "format": "hidden"
+        },
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
+        },
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
+        }
+      },
+      "type": "object",
+      "format": "grid"
+		},
+		"date": {
+      "$id": "date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+		}
+  },
+  "properties": {
+    "suffix": {
+      "type": "string",
+      "default": "Microhardness",
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sampleId suffix '_') false}}",
+      "watch": {
+        "sampleId": "root.sampleId",
+        "suffix": "root.suffix"
+      },
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+    "sampleId": {
+      "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A",
+      "format": "custom",
+      "pattern": "([A-Z]{3}[0-9]{2})_(VAM|DED)-[A-Z]",
+      "propertyOrder": 0,
+      "type": "string"
+    },
+    "Process Overview": {
+      "properties": {
+        "Start Date": {
+          "$ref": "#/definitions/date",
+          "propertyOrder": 0
+        },
+        "End Date": {
+          "$ref": "#/definitions/date",
+          "propertyOrder": 1
+        },
+        "Time Spent": {
+          "description": "HH:MM",
+          "errorMessage": "Please enter a time in the HH:MM format",
+          "fieldType": "text",
+          "format": "custom",
+          "pattern": "^[0-9]+:[0-5][0-9]$",
+          "propertyOrder": 2,
+          "type": "string"
+        }
+      },
+      "propertyOrder": 1,
+      "type": "object",
+      "format": "grid"
+    },
+    "Test Information": {
+      "properties": {
+        "Type": {
+          "propertyOrder": 0,
+          "type": "string",
+          "default": "Vickers"
+        },
+        "Load": {
+          "propertyOrder": 1,
+          "type": "number",
+          "description": "gf"
+        },
+        "Dwell Time": {
+          "description": "s",
+          "propertyOrder": 2,
+          "type": "number"
+        },
+        "Indents per Sample": {
+          "propertyOrder": 3,
+          "type": "number"
+        }
+      },
+      "propertyOrder": 2,
+      "type": "object",
+      "format": "grid"
+    },
+    "Results": {
+      "properties": {
+        "files": {
+          "title": "Upload additional data files",
+          "$ref": "#/definitions/files",
+          "propertyOrder": 1
+        },
+        "Notes": {
+          "type": "string",
+          "propertyOrder": 2
+        }
+      },
+      "propertyOrder": 4,
+      "type": "object",
+      "format": "grid"
+    }
+  },
+  "title": "Microhardness Details",
+  "type": "object"
+}

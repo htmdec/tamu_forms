@@ -1,0 +1,234 @@
+{
+  "description": "Form to track the tensile characterization details.",
+  "definitions": {
+    "files": {
+      "$id": "files",
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{tamupath sample false}}",
+          "watch": {
+            "sample": "root.sampleId"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "sampleId": {
+          "type": "string",
+          "template": "{{sample}}",
+          "watch": {
+            "sample": "root.sampleId"
+          },
+          "propertyOrder": 2,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
+        },
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
+        }
+      },
+      "type": "object",
+      "title": "file",
+      "format": "grid"
+    },
+    "date": {
+      "$id": "date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+    }
+  },
+  "properties": {
+    "suffix": {
+      "type": "string",
+      "default": "Tensile",
+      "options": {
+        "hidden": true
+      }
+    },
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath sample false}}",
+      "watch": {
+        "sample": "root.sampleId"
+      },
+      "propertyOrder": 103,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+    "sampleId": {
+      "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A_Tensile_a or BAA01_VAM-A_Tensile_b",
+      "format": "custom",
+      "description": "E.g. BAA01_VAM-A_Tensile_a or BAA16_VAM-B_Tensile_z",
+      "pattern": "([A-Z]{3}[0-9]{2})_VAM-[A-Z]_Tensile_[a-z]",
+      "propertyOrder": 0,
+      "type": "string"
+    },
+    "Start Date": {
+      "propertyOrder": 1,
+      "type": "string",
+      "format": "date",
+      "options": {
+        "grid_columns": 4,
+        "inputAttributes": {
+          "placeholder": "Enter date"
+        },
+        "flatpickr": {
+          "dateFormat": "Y-m-d",
+          "enableTime": false
+        }
+      }
+    },
+    "End Date": {
+      "$ref": "#/definitions/date",
+      "propertyOrder": 2
+    },
+    "Time Spent": {
+      "description": "HH:MM",
+      "errorMessage": "Please enter a time in the HH:MM format",
+      "fieldType": "text",
+      "format": "custom",
+      "pattern": "^[0-9]+:[0-5][0-9]$",
+      "propertyOrder": 4,
+      "type": "string"
+    },
+    "Completed By": {
+      "type": "string",
+      "propertyOrder": 5
+    },
+    "Sample Dimensions": {
+      "properties": {
+        "Gauge Length": {
+          "description": "mm",
+          "propertyOrder": 0,
+          "type": "number",
+          "default": "8"
+        },
+        "Width": {
+          "description": "mm",
+          "propertyOrder": 1,
+          "type": "number"
+        },
+        "Thickness": {
+          "description": "mm",
+          "propertyOrder": 2,
+          "type": "number"
+        },
+        "Area": {
+          "type": "string",
+          "propertyOrder": 3,
+          "template": "{{multiply Width Thickness}}",
+          "watch": {
+            "Width": "root.Sample Dimensions.Width",
+            "Thickness": "root.Sample Dimensions.Thickness"
+          }
+        }
+      },
+      "propertyOrder": 6,
+      "type": "object",
+      "format": "grid"
+    },
+    "Modulus Check": {
+      "properties": {
+        "Force Rate": {
+          "description": "N/s",
+          "propertyOrder": 0,
+          "type": "number"
+        },
+        "Max Force": {
+          "description": "N",
+          "propertyOrder": 1,
+          "type": "number"
+        },
+        "My Max Stress": {
+          "type": "string",
+          "propertyOrder": 2,
+          "template": "{{divide Force (multiply Width Thickness)}}",
+          "watch": {
+            "Force": "root.Modulus Check.Max Force",
+            "Width": "root.Sample Dimensions.Width",
+            "Thickness": "root.Sample Dimensions.Thickness"
+          }
+        }
+      },
+      "propertyOrder": 7,
+      "type": "object",
+      "format": "grid"
+    },
+    "Results": {
+      "properties": {
+        "Elastic Modulus": {
+          "description": "GPa",
+          "propertyOrder": 0,
+          "type": "number"
+        },
+        "Yield Strength": {
+          "description": "MPa",
+          "propertyOrder": 1,
+          "type": "number"
+        },
+        "Ultimate Tensile Strength": {
+          "description": "MPa",
+          "type": "number",
+          "propertyOrder": 2
+        },
+        "Elongation": {
+          "description": "%",
+          "type": "number",
+          "propertyOrder": 3
+        },
+        "Maximum ∂2σ/∂ε2": {
+          "description": "MPa",
+          "type": "number",
+          "propertyOrder": 4
+        },
+        "UTS/YS Ratio": {
+          "type": "string",
+          "propertyOrder": 5,
+          "template": "{{divide UTS YS}}",
+          "watch": {
+            "UTS": "root.Results.Ultimate Tensile Strength",
+            "YS": "root.Results.Yield Strength"
+          }
+        }
+      },
+      "propertyOrder": 8,
+      "type": "object",
+      "format": "grid"
+    },
+    "File Upload": {
+      "title": "Instrument File Upload",
+      "propertyOrder": 9,
+      "description": "Please attach the .txt file exported from the instrument to be processed.",
+      "$ref": "#/definitions/files"
+    },
+    "Notes": {
+      "type": "string",
+      "propertyOrder": 10
+    }
+  },
+  "title": "Tensile Details",
+  "type": "object"
+}

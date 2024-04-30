@@ -1,0 +1,283 @@
+{
+  "definitions": {
+    "files": {
+      "$id": "#/definitions/files",
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{tamupath (join sampleId suffix '_') false}}",
+          "watch": {
+            "sampleId": "root.sampleId",
+            "suffix": "root.suffix"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "sampleId": {
+          "type": "string",
+          "template": "{{sampleId}}",
+          "watch": {
+            "sampleId": "root.sampleId"
+          },
+          "propertyOrder": 2,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
+        },
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
+        }
+      },
+      "type": "object",
+      "title": "file",
+      "format": "grid"
+    },
+		"date": {
+      "$id": "#/definitions/date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+		}
+  },
+  "description": "Form to track the EDS/EBSD characterization details.",
+  "properties": {
+    "suffix": {
+      "type": "string",
+      "default": "EDS",
+      "options": {
+        "hidden": true
+      }
+    },
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sampleId suffix '_') false}}",
+      "watch": {
+        "sampleId": "root.sampleId",
+        "suffix": "root.suffix"
+      },
+      "propertyOrder": 103,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+    "sampleId": {
+      "type": "string",
+      "propertyOrder": 0,
+      "format": "custom",
+      "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A or BAA01_DED-A",
+      "pattern": "([A-Z]{3}[0-9]{2})_(VAM|DED)-[A-Z]"
+    },
+    "Process Overview": {
+      "properties": {
+        "Start Date": {
+          "$ref": "#/definitions/date",
+          "propertyOrder": 0
+        },
+        "End Date": {
+          "$ref": "#/definitions/date",
+          "propertyOrder": 1
+        },
+        "Time Spent": {
+          "description": "HH:MM",
+          "errorMessage": "Please enter a time in the HH:MM format",
+          "fieldType": "text",
+          "format": "custom",
+          "pattern": "^[0-9]+:[0-5][0-9]$",
+          "propertyOrder": 2,
+          "type": "string"
+        },
+        "SEM Used": {
+          "type": "string",
+          "propertyOrder": 3,
+          "enum": [
+            "FERA",
+            "Quanta 600",
+            "Phenom",
+            "Apreo (FEI)"
+          ]
+        }
+      },
+      "propertyOrder": 1,
+      "type": "object",
+      "format": "grid"
+    },
+    "EDS Quantitative Analysis": {
+      "properties": {
+        "Sample Tilt": {
+          "propertyOrder": 0,
+          "type": "number",
+          "default": "0",
+          "description": "degrees"
+        },
+        "Low Vacuum": {
+          "propertyOrder": 1,
+          "type": "string",
+          "default": "None",
+          "description": "mbar"
+        },
+        "Beam Voltage": {
+          "description": "kV",
+          "propertyOrder": 2,
+          "type": "number",
+          "default": "20"
+        },
+        "Beam Current": {
+          "description": "nA",
+          "propertyOrder": 3,
+          "type": "number",
+          "default": "3.2"
+        },
+        "Dwell Time": {
+          "description": "min",
+          "propertyOrder": 4,
+          "type": "number",
+          "default": "1"
+        },
+        "Working Distance": {
+          "description": "mm",
+          "propertyOrder": 5,
+          "type": "number",
+          "default": "10"
+        }
+      },
+      "propertyOrder": 2,
+      "type": "object",
+      "format": "grid"
+    },
+    "EBSD and EDS Mapping": {
+      "properties": {
+        "Sample Tilt": {
+          "propertyOrder": 0,
+          "type": "number",
+          "default": "60",
+          "description": "degrees"
+        },
+        "Low Vacuum": {
+          "propertyOrder": 1,
+          "type": "string",
+          "default": "25",
+          "description": "mbar"
+        },
+        "Beam Voltage": {
+          "description": "kV",
+          "propertyOrder": 2,
+          "type": "number",
+          "default": "20"
+        },
+        "Beam Current": {
+          "description": "nA",
+          "propertyOrder": 3,
+          "type": "number",
+          "default": "26"
+        },
+        "Dwell Time": {
+          "propertyOrder": 4,
+          "type": "string",
+          "default": "4 x 1",
+          "description": "ms"
+        },
+        "Working Distance": {
+          "description": "mm",
+          "propertyOrder": 5,
+          "type": "number",
+          "default": "18.1"
+        }
+      },
+      "propertyOrder": 3,
+      "type": "object",
+      "format": "grid"
+    },
+    "Results": {
+      "type": "object",
+      "properties": {
+        "Measured Composition (%)": {
+          "propertyOrder": 1,
+          "properties": {
+            "Al": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 6,
+              "type": "number"
+            },
+            "Co": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 3,
+              "type": "number"
+            },
+            "Cr": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 4,
+              "type": "number"
+            },
+            "Fe": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 1,
+              "type": "number"
+            },
+            "Ni": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 2,
+              "type": "number"
+            },
+            "V": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 5,
+              "type": "number"
+            },
+            "Cu": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 7,
+              "type": "number"
+            },
+            "Mn": {
+              "maximum": 100,
+              "minimum": 0,
+              "propertyOrder": 8,
+              "type": "number"
+            }
+          }
+        },
+        "files": {
+          "title": "Upload SEM / EDS Images",
+          "description": "You can select multiple files at once.",
+          "$ref": "#/definitions/files",
+          "propertyOrder": 2
+        }
+      },
+      "propertyOrder": 6,
+      "format": "grid"
+    },
+    "Notes": {
+      "type": "string",
+      "propertyOrder": 4
+    }
+  },
+  "title": "EDS and EBSD Details",
+  "type": "object"
+}

@@ -1,0 +1,188 @@
+{
+  "definitions": {
+		"files": {
+			"$id": "files",
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{tamupath (join sampleId suffix '_') false}}",
+          "watch": {
+            "sampleId": "root.sampleId",
+            "suffix": "root.suffix"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "sampleId": {
+          "type": "string",
+          "template": "{{sampleId}}",
+          "watch": {
+            "sampleId": "root.sampleId"
+          },
+          "propertyOrder": 2,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
+        },
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
+        }
+      },
+      "type": "object",
+      "title": "file",
+      "format": "grid"
+		},
+    "lipit": {
+      "$id": "lipit",
+      "multiple": true,
+      "properties": {
+        "Test Number": {
+          "propertyOrder": 0,
+          "type": "integer"
+        },
+        "Coordination": {
+          "propertyOrder": 1,
+          "type": "string"
+        },
+        "Notes": {
+          "propertyOrder": 2,
+          "type": "string"
+        }
+      },
+      "title": "LIPIT Test",
+      "type": "object",
+      "format": "grid"
+    },
+		"date": {
+      "$id": "date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+		}
+  },
+  "description": "Form to track LIPIT testing details.",
+  "properties": {
+    "suffix": {
+      "type": "string",
+      "default": "LIPIT",
+      "options": {
+        "hidden": true
+      }
+    },
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sampleId suffix '_') false}}",
+      "watch": {
+        "sampleId": "root.sampleId",
+        "suffix": "root.suffix"
+      },
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+    "sampleId": {
+      "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A",
+      "format": "custom",
+      "pattern": "([A-Z]{3}[0-9]{2})_VAM-[A-Z]",
+      "propertyOrder": 0,
+      "type": "string"
+    },
+    "Operator": {
+      "type": "string",
+      "propertyOrder": 1
+    },
+    "Start Date": {
+      "$ref": "#/definitions/date",
+      "propertyOrder": 2
+    },
+    "End Date": {
+      "$ref": "#/definitions/date",
+      "propertyOrder": 3
+    },
+    "Projectile Materials": {
+      "propertyOrder": 4,
+      "enum": [
+        "Al2O3"
+      ],
+      "type": "string"
+    },
+    "LIPIT Test Information": {
+      "minItems": 1,
+      "items": {
+        "$ref": "#/definitions/lipit"
+      },
+      "propertyOrder": 6,
+      "type": "array",
+      "format": "table"
+    },
+    "resultFile": {
+      "title": "Sample LIPIT Results",
+      "description": "Please attach the .xlsx file that contains the results for one sample.",
+      "propertyOrder": 7,
+      "$ref": "#/definitions/files",
+      "type": "object"
+    },
+    "imageFiles": {
+      "title": "Image Files",
+      "description": "Upload photos.",
+      "propertyOrder": 8,
+      "allOf": [{ "$ref": "#/definitions/files" }],
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{rootTargetPath}}/IMAGES",
+          "watch": {
+            "rootTargetPath": "root.targetPath"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        }
+      }
+    },
+    "movieFiles": {
+      "title": "Movie Files",
+      "description": "Upload movies.",
+      "propertyOrder": 9,
+      "allOf": [{ "$ref": "#/definitions/files" }],
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{rootTargetPath}}/MOVIES",
+          "watch": {
+            "rootTargetPath": "root.targetPath"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        }
+      }
+    }
+  },
+  "title": "LIPIT Test Details",
+  "type": "object"
+}

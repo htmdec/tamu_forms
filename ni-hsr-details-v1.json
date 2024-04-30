@@ -1,0 +1,299 @@
+{
+	"description": "Form to track the nanoindentation (High Strain Rate) details.",
+	"definitions": {
+		"files": {
+			"$id": "#/definitions/files",
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{tamupath (join sample suffix '_') false}}",
+          "watch": {
+            "sample": "root.sampleId",
+            "suffix": "root.suffix"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "sampleId": {
+          "type": "string",
+          "template": "{{sample}}",
+          "watch": {
+            "sample": "root.sampleId"
+          },
+          "propertyOrder": 2,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
+        },
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
+        }
+      },
+      "type": "object",
+      "title": "file",
+      "format": "grid"
+		},
+		"date": {
+      "$id": "#/definitions/date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+		}
+	},
+	"properties": {
+		"suffix": {
+			"type": "string",
+			"default": "NI-HSR",
+			"options": {
+				"hidden": true
+			}
+		},
+		"sampleId": {
+			"errorMessage": "Please enter a Sample ID such as BAA01_VAM-A.",
+			"format": "custom",
+			"pattern": "(B[A-Z]{2}[0-9]{2})_(VAM|DED)-[A-Z]",
+			"propertyOrder": 0,
+			"type": "string",
+      "title": "Sample ID"
+		},
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sample suffix '_') false}}",
+      "watch": {
+        "sample": "root.sampleId",
+        "suffix": "root.suffix"
+      },
+      "propertyOrder": 3,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+		"Indentation Date": {
+			"$ref": "#/definitions/date",
+			"propertyOrder": 1
+		},
+		"Operator": {
+			"type": "string",
+			"propertyOrder": 2,
+			"default": "Jacob Hempel"
+		},
+		"Indenter ID": {
+			"type": "string",
+			"propertyOrder": 3
+		},
+		"Tip Cal Date": {
+			"propertyOrder": 4,
+			"$ref": "#/definitions/date"
+		},
+		"Device Used": {
+			"type": "string",
+			"enum": [
+				"BAMM-BAMM HSR Nanoindenter"
+			],
+			"propertyOrder": 5
+		},
+		"Time Spent": {
+			"description": "HH:MM",
+			"errorMessage": "Please enter a time in the HH:MM format",
+			"fieldType": "text",
+			"format": "custom",
+			"pattern": "^[0-9]+:[0-5][0-9]$",
+			"propertyOrder": 6,
+			"type": "string",	  
+			"default": "02:00"
+		},
+		"Test Parameters": {
+			"properties": {
+				"Method Directory": {
+					"propertyOrder": 0,
+					"type": "string",
+					"default": "C:\\Users\\Public\\Documents\\Nanomechanics\\Profiles\\JacobH\\Methods"
+				},
+				"Method filename": {
+					"propertyOrder": 1,
+					"type": "string",
+					"default": "impact_plus_CSR.NMT"
+				},
+				"Step Magnitude": {
+					"description": "mN",
+					"propertyOrder": 2,
+					"type": "number",
+					"default": 25
+				},
+				"Target Load": {
+					"propertyOrder": 3,
+					"type": "number",
+					"default": 1000,
+					"description": "mN"
+				},
+				"Target Ind. Strain Rate": {
+					"propertyOrder": 4,
+					"type": "number",
+					"default": 2,
+					"description": "1/s"
+				},
+				"Hold Maximum Load Time": {
+					"propertyOrder": 5,
+					"type": "number",
+					"default": 2,
+					"description": "seconds"
+				},
+				"Unload Time": {
+					"propertyOrder": 6,
+					"type": "number",
+					"description": "seconds",
+					"default": 1
+				},
+				"Surface Stiffness Trigger": {
+					"propertyOrder": 7,
+					"type": "number",
+					"description": "N/m",
+					"default": 800
+				},
+				"Number of Indents": {
+					"propertyOrder": 8,
+					"type": "number",
+					"default": 5
+				},
+				"Engage Options, Drift": {
+					"propertyOrder": 9,
+					"type": "number",
+					"description": "nm/s",
+					"default": 0.5
+				},
+				"Engage Options, Drift Timeout": {
+					"propertyOrder": 10,
+					"type": "number",
+					"description": "seconds",
+					"default": 300
+				}
+			},
+			"propertyOrder": 7,
+			"type": "object"
+		},
+		"Analysis Parameters": {
+			"properties": {
+				"Tip Area Function Coefficients": {
+					"properties": {
+						"m0": {
+							"type": "number", 
+							"propertyOrder": 0
+						},
+						"m1": {
+							"type": "number", 
+							"propertyOrder": 1
+						},
+						"m2": {
+							"type": "number", 
+							"propertyOrder": 2
+						},
+						"m3": {
+							"type": "number", 
+							"propertyOrder": 3
+						},
+						"m4": {
+							"type": "number", 
+							"propertyOrder": 4
+						}
+					},
+					"propertyOrder": 0,
+					"type": "object",
+					"format": "grid"
+				},
+				"Frame Stiffness": {
+					"description": "N/m",
+					"propertyOrder": 1,
+					"type": "number",
+					"default": 8000000
+				},
+				"Actuator Spring Stiffness": {
+					"propertyOrder": 2,
+					"type": "number",
+					"default": 448,
+					"description": "N/m"
+				},
+				"Actuator Damping Coefficient": {
+					"propertyOrder": 3,
+					"type": "number",
+					"default": 0.144,
+					"description": "N m/s"
+				},
+				"Actuator Column Mass": {
+					"propertyOrder": 4,
+					"type": "number",
+					"default": 0.0090855,
+					"description": "kg"
+				},
+				"Actuator Calibration Coefficient": {
+					"propertyOrder": 5,
+					"type": "number",
+					"description": "mV/mN",
+					"default": 10.546
+				},
+				"Pieze Load Cell Stiffness": {
+					"propertyOrder": 6,
+					"type": "number",
+					"description": "N/m",
+					"default": 14700000
+				},
+				"Piezo Load Cell Damping Coefficient": {
+					"propertyOrder": 7,
+					"type": "number",
+					"default": 40,
+					"description": "N m/s"
+				},
+				"Piezo Load Cell Effective Mass": {
+					"propertyOrder": 8,
+					"type": "number",
+					"description": "kg",
+					"default": 0.00513
+				},
+				"Piezo Calibration Coefficient": {
+					"propertyOrder": 9,
+					"type": "number",
+					"description": "mV/mN"
+				}
+			},
+			"propertyOrder": 8,
+			"type": "object"
+		},
+		"Raw Data File Upload": {
+			"propertyOrder": 9,
+			"title": "Raw Data (.zip) File Upload",
+			"description": "Please attach the raw data (.zip) file.",
+			"$ref": "#/definitions/files"
+		},
+		"Data File Upload": {
+			"propertyOrder": 10,
+			"title": "Data (.xlsx) File Upload",
+			"description": "Please attach the data (.xlsx) file to be processed.",
+			"$ref": "#/definitions/files"
+		},
+		"Notes": {
+			"type": "string",
+			"propertyOrder": 11
+		}
+	},
+	"title": "High Strain Rate Nanoindentation Details",
+	"type": "object"
+}

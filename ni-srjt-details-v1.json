@@ -1,0 +1,299 @@
+{
+	"description": "Form to track the nanoindentation (iMicro indenter) details for the strain rate jump test (SRJT) method.",
+	"definitions": {
+		"files": {
+			"$id": "files",
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{tamupath (join sample suffix '_') false}}",
+          "watch": {
+            "sample": "root.sampleId",
+            "suffix": "root.suffix"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "sampleId": {
+          "type": "string",
+          "template": "{{sample}}",
+          "watch": {
+            "sample": "root.sampleId"
+          },
+          "propertyOrder": 2,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
+        },
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
+        }
+      },
+      "type": "object",
+      "title": "file",
+      "format": "grid"
+		},
+		"date": {
+      "$id": "date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+		}
+	},
+	"properties": {
+    "suffix": {
+      "type": "string",
+      "default": "NI-SRJT",
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+		"sampleId": {
+      "title": "Sample ID",
+			"errorMessage": "Please enter a Sample ID such as BAA01_VAM-A or BAA01_DED-A",
+			"format": "custom",
+			"pattern": "([A-Z]{3}[0-9]{2})_(VAM|DED)-[A-Z]",
+			"propertyOrder": 0,
+			"type": "string"
+		},
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sample suffix '_') false}}",
+      "watch": {
+        "sample": "sampleId",
+        "suffix": "suffix"
+      },
+      "propertyOrder": 103,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+		"Operator": {
+			"fieldType": "text",
+			"format": "text",
+			"propertyOrder": 1,
+			"type": "string"
+		},
+		"Indentation Date": {
+			"$ref": "#/definitions/date",
+			"propertyOrder": 2
+		},
+		"Indenter Tip Number": {
+			"propertyOrder": 3,
+			"type": "string"
+		},
+		"Tip Cal Date": {
+			"$ref": "#/definitions/date",
+			"propertyOrder": 4
+		},
+		"Number of Indents": {
+			"propertyOrder": 5,
+			"type": "number"
+		},
+		"Device Used": {
+			"propertyOrder": 6,
+			"type": "string",
+			"enum": [
+				"KLA iMicro Nanoindenter (iMicro 1)"
+			]
+		},
+		"Time Spent": {
+			"description": "HH:MM",
+			"errorMessage": "Please enter a time in the HH:MM format",
+			"fieldType": "text",
+			"format": "custom",
+			"pattern": "^[0-9]+:[0-5][0-9]$",
+			"propertyOrder": 7,
+			"type": "string"
+		},
+		"Sample Poisson Ratio": {
+			"type": "string",
+			"propertyOrder": 8
+		},
+		"Machine Settings": {
+			"properties": {
+				"Target Load": {
+					"description": "mN",
+					"propertyOrder": 0,
+					"type": "number",
+					"default": "1000"
+				},
+				"Target Depth": {
+					"description": "nm",
+					"propertyOrder": 1,
+					"type": "number",
+					"default": "3000"
+				},
+				"Target CSM Frequency": {
+					"description": "Hz",
+					"propertyOrder": 2,
+					"type": "number",
+					"default": "100"
+				},
+				"Surface Approach Velocity": {
+					"description": "nm/s",
+					"propertyOrder": 3,
+					"type": "number",
+					"default": "100"
+				},
+				"Target Dynamic Displacement": {
+					"description": "nm",
+					"propertyOrder": 4,
+					"type": "number",
+					"default": "2"
+				},
+				"Hold Max Load Time": {
+					"description": "s",
+					"propertyOrder": 5,
+					"type": "number",
+					"default": "0"
+				},
+				"Surface Approach Distance": {
+					"description": "nm",
+					"propertyOrder": 6,
+					"type": "number",
+					"default": "2000"
+				},
+				"Data Acquisition Rate": {
+					"description": "Hz",
+					"propertyOrder": 7,
+					"type": "number",
+					"default": "100"
+				},
+				"Depth to Start Averages": {
+					"propertyOrder": 8,
+					"type": "number",
+					"description": "nm",
+					"default": "2100"
+				},
+				"Depth to End Averages": {
+					"propertyOrder": 9,
+					"type": "number",
+					"description": "nm",
+					"default": "2450"
+				},
+				"Lower Mask": {
+					"propertyOrder": 10,
+					"type": "number",
+					"default": 100
+				},
+				"Upper Mask": {
+					"propertyOrder": 11,
+					"type": "number",
+					"default": 25
+				}
+			},
+			"propertyOrder": 10,
+			"type": "object"
+		},
+		"Test Parameters": {
+			"properties": {
+				"Initial Depth": {
+					"description": "nm",
+					"type": "number",
+					"default": "600",
+					"propertyOrder": 0
+				},
+				"Target Depth: Jump 1": {
+					"description": "nm",
+					"type": "number",
+					"default": "1000",
+					"propertyOrder": 1
+				},
+				"Target Depth: Jump 2": {
+					"description": "nm",
+					"type": "number",
+					"default": "1500",
+					"propertyOrder": 2
+				},
+				"Target Depth: Jump 3": {
+					"description": "nm",
+					"type": "number",
+					"default": "2000",
+					"propertyOrder": 3
+				},
+				"Target Depth: Jump 4": {
+					"description": "nm",
+					"type": "number",
+					"default": "2500",
+					"propertyOrder": 4
+				},
+				"Final Depth": {
+					"description": "nm",
+					"type": "number",
+					"propertyOrder": 5
+				},
+				"Initial Target Strain Rate": {
+					"type": "number",
+					"default": "0.2",
+					"propertyOrder": 6
+				},
+				"Target Strain Rate: Jump 1": {
+					"type": "number",
+					"default": "0.02",
+					"propertyOrder": 7
+				},
+				"Target Strain Rate: Jump 2": {
+					"type": "number",
+					"default": "0.2",
+					"propertyOrder": 8
+				},
+				"Target Strain Rate: Jump 3": {
+					"type": "number",
+					"default": "0.002",
+					"propertyOrder": 9
+				},
+				"Target Strain Rate: Jump 4": {
+					"type": "number",
+					"default": "0.2",
+					"propertyOrder": 10
+				},
+				"Final Load": {
+					"type": "number",
+					"propertyOrder": 11
+				}
+			},
+			"propertyOrder": 11,
+			"type": "object"
+		},
+		"Raw Data File Upload": {
+			"propertyOrder": 12,
+			"title": "Raw Data (.nmd) File Upload",
+			"description": "Please attach the raw data (.nmd) file.",
+			"$ref": "#/definitions/files"
+		},
+		"Data File Upload": {
+			"propertyOrder": 13,
+			"title": "Data (.xlsx) File Upload",
+			"description": "Please attach the data (.xlsx) file to be processed.",
+			"$ref": "#/definitions/files"
+		},
+		"Notes": {
+			"type": "string",
+			"propertyOrder": 14
+		}
+	},
+	"title": "Nanoindentation (SRJT) Details",
+	"type": "object"
+}

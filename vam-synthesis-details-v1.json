@@ -1,0 +1,331 @@
+{
+  "definitions": {
+   "date": {
+      "$id": "#/definitions/date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+    }
+  },
+  "description": "Form to track the VAM synthesis details.",
+  "properties": {
+   "Material Preparation": {
+    "propertyOrder": 1,
+    "description": "Material to be weighed out to the nearest hundreth of the targeted weight (in grams).",
+    "properties": {
+     "Process Overview": {
+      "properties": {
+       "Start Date": {
+        "$ref": "#/definitions/date",
+        "propertyOrder": 0
+       },
+       "Finish Date": {
+        "$ref": "#/definitions/date",
+        "propertyOrder": 1
+       },
+       "Time Spent": {
+        "description": "HH:MM",
+        "propertyOrder": 2,
+        "errorMessage": "The format must be a time as HH:MM",
+        "format": "custom",
+        "pattern": "^[0-9]+:[0-5][0-9]$",
+        "type": "string"
+       },
+       "Completed By": {
+        "type": "string",
+        "propertyOrder": 3
+       }
+      },
+      "type": "object",
+      "propertyOrder": 0,
+      "format": "grid"
+     },
+     "Target Mass": {
+      "description": "grams",
+      "properties": {
+       "Al": {
+        "propertyOrder": 0,
+        "type": "number"
+       },
+       "Co": {
+        "propertyOrder": 5,
+        "type": "number"
+       },
+       "Cr": {
+        "propertyOrder": 2,
+        "type": "number"
+       },
+       "Cu": {
+        "propertyOrder": 7,
+        "type": "number"
+       },
+       "Fe": {
+        "propertyOrder": 4,
+        "type": "number"
+       },
+       "Mn": {
+        "propertyOrder": 3,
+        "type": "number"
+       },
+       "Ni": {
+        "propertyOrder": 6,
+        "type": "number"
+       },
+       "V": {
+        "propertyOrder": 1,
+        "type": "number"
+       },
+       "Total": {
+        "type": "string",
+        "title": "Total",
+        "template": "{{{add Cu (add Mn (add Fe (add Ni (add Co (add Cr (add V Al))))))}}}",
+        "watch": {
+         "Fe": "root.Material Preparation.Target Mass.Fe",
+         "Ni": "root.Material Preparation.Target Mass.Ni",
+         "Co": "root.Material Preparation.Target Mass.Co",
+         "Cr": "root.Material Preparation.Target Mass.Cr",
+         "V": "root.Material Preparation.Target Mass.V",
+         "Al": "root.Material Preparation.Target Mass.Al",
+         "Cu": "root.Material Preparation.Weighed Mass.Cu",
+         "Mn": "root.Material Preparation.Weighed Mass.Mn"
+        }
+       }
+      },
+      "type": "object",
+      "propertyOrder": 1,
+      "format": "grid"
+     },
+     "Weighed Mass": {
+      "description": "grams",
+      "properties": {
+       "Al": {
+        "propertyOrder": 0,
+        "type": "number"
+       },
+       "Co": {
+        "propertyOrder": 5,
+        "type": "number"
+       },
+       "Cr": {
+        "propertyOrder": 2,
+        "type": "number"
+       },
+       "Cu": {
+        "propertyOrder": 7,
+        "type": "number"
+       },
+       "Fe": {
+        "propertyOrder": 4,
+        "type": "number"
+       },
+       "Mn": {
+        "propertyOrder": 3,
+        "type": "number"
+       },
+       "Ni": {
+        "propertyOrder": 6,
+        "type": "number"
+       },
+       "V": {
+        "propertyOrder": 1,
+        "type": "number"
+       },
+       "Total": {
+        "type": "string",
+        "title": "Total",
+        "template": "{{{add Cu (add Mn (add Fe (add Ni (add Co (add Cr (add V Al))))))}}}",
+        "watch": {
+         "Fe": "root.Material Preparation.Weighed Mass.Fe",
+         "Ni": "root.Material Preparation.Weighed Mass.Ni",
+         "Co": "root.Material Preparation.Weighed Mass.Co",
+         "Cr": "root.Material Preparation.Weighed Mass.Cr",
+         "V": "root.Material Preparation.Weighed Mass.V",
+         "Al": "root.Material Preparation.Weighed Mass.Al",
+         "Cu": "root.Material Preparation.Weighed Mass.Cu",
+         "Mn": "root.Material Preparation.Weighed Mass.Mn"
+        }
+       }
+      },
+      "type": "object",
+      "propertyOrder": 2,
+      "format": "grid"
+     }
+    }
+   },
+   "Arc Melting": {
+    "propertyOrder": 2,
+    "description": "Arc melter must be completely cleaned before any melting can begin.",
+    "properties": {
+     "Process Overview": {
+      "properties": {
+       "Start Date": {
+        "$ref": "#/definitions/date",
+        "propertyOrder": 0
+       },
+       "Finish Date": {
+        "$ref": "#/definitions/date",
+        "propertyOrder": 1
+       },
+       "Time Spent": {
+        "description": "HH:MM",
+        "propertyOrder": 2,
+        "errorMessage": "The format must be a time as HH:MM",
+        "format": "custom",
+        "pattern": "^[0-9]+:[0-5][0-9]$",
+        "type": "string"
+       },
+       "Completed By": {
+        "type": "string",
+        "propertyOrder": 3
+       }
+      },
+      "type": "object",
+      "propertyOrder": 0,
+      "format": "grid"
+     },
+     "VAM Details": {
+      "properties": {
+       "Ingot Location": {
+        "propertyOrder": 0,
+        "type": "integer"
+       },
+       "Initial Purging Times": {
+        "default": "3",
+        "propertyOrder": 1,
+        "type": "integer"
+       },
+       "Diffusion": {
+        "default": "Before Each Melt",
+        "propertyOrder": 2,
+        "type": "string"
+       },
+       "Vacuum Before Melt": {
+        "default": "0.00005",
+        "description": "Torr",
+        "propertyOrder": 3,
+        "type": "number"
+       },
+       "Argon Pressure": {
+        "default": "850-900",
+        "description": "mbar",
+        "propertyOrder": 4,
+        "type": "string"
+       }
+      },
+      "type": "object",
+      "propertyOrder": 1,
+      "format": "grid"
+     },
+     "Ingot Mass Information": {
+      "properties": {
+       "Final Ingot Mass": {
+        "description": "g",
+        "propertyOrder": 0,
+        "type": "number"
+       },
+       "Mass Loss": {
+        "description": "%",
+        "propertyOrder": 1,
+        "type": "number"
+       }
+      },
+      "type": "object",
+      "propertyOrder": 4,
+      "format": "grid"
+     },
+     "3 Part Sections": {
+      "properties": {
+       "1": {
+        "properyOrder": 0,
+        "type": "number"
+       },
+       "2": {
+        "properyOrder": 1,
+        "type": "number"
+       },
+       "3": {
+        "properyOrder": 2,
+        "type": "number"
+       }
+      },
+      "type": "object",
+      "propertyOrder": 2,
+      "format": "grid",
+      "description": "amps"
+     },
+     "Full Ingot": {
+      "properties": {
+       "1": {
+        "properyOrder": 0,
+        "type": "number"
+       },
+       "2": {
+        "properyOrder": 1,
+        "type": "number"
+       },
+       "3": {
+        "properyOrder": 2,
+        "type": "number"
+       },
+       "4": {
+        "properyOrder": 3,
+        "type": "number"
+       },
+       "5": {
+        "properyOrder": 4,
+        "type": "number"
+       },
+       "6": {
+        "properyOrder": 5,
+        "type": "number"
+       },
+       "7": {
+        "properyOrder": 6,
+        "type": "number"
+       }
+      },
+      "type": "object",
+      "propertyOrder": 3,
+      "format": "grid",
+      "description": "amps"
+     }
+    }
+   },
+    "suffix": {
+      "type": "string",
+      "default": "Syn",
+      "options": {
+        "hidden": true
+      }
+    },
+   "sampleId": {
+    "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A",
+    "format": "custom",
+    "pattern": "([A-Z]{3}[0-9]{2})_VAM-[A-Z]",
+    "propertyOrder": 0,
+    "type": "string"
+   },
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sampleId suffix '_') false}}",
+      "watch": {
+        "sampleId": "root.sampleId",
+        "suffix": "root.suffix"
+      },
+      "propertyOrder": 103,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+
+   "Notes": {
+    "type": "string",
+    "propertyOrder": 5
+   }
+  },
+  "title": "VAM Synthesis Details",
+  "type": "object"
+}

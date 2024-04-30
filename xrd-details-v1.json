@@ -1,0 +1,356 @@
+{
+  "definitions": {
+    "ucsd": {
+      "$id": "ucsd",
+      "properties": {
+        "2\u03B8 Angle Start": {
+          "type": "number",
+          "propertyOrder": 0,
+          "default": "0"
+        },
+        "2\u03B8 Angle End": {
+          "type": "number",
+          "propertyOrder": 1,
+          "default": "80"
+        },
+        "Scan Speed": {
+          "type": "number",
+          "propertyOrder": 2,
+          "description": "degrees/s",
+          "default": "0.05"
+        },
+        "\u03C9 Angle": {
+          "type": "array",
+          "format": "table",
+          "propertyOrder": 3,
+          "items": {
+            "type": "object",
+            "properties": {
+              "\u03C9 Angle": {
+                "type": "number",
+                "description": "degrees"
+              }
+            }
+          },
+          "default": [
+            {
+              "\u03C9 Angle": -4
+            },
+            {
+              "\u03C9 Angle": -2
+            },
+            {
+              "\u03C9 Angle": 0
+            },
+            {
+              "\u03C9 Angle": 2
+            },
+            {
+              "\u03C9 Angle": 4
+            }
+          ],
+          "options": {
+            "compact": true
+          }
+        },
+        "dataFiles": {
+          "title": "Upload Data Files",
+          "description": "You can select multiple files at once.",
+          "$ref": "#/definitions/files",
+          "propertyOrder": 4
+        },
+        "Notes": {
+          "type": "string",
+          "propertyOrder": 5
+        }
+      }
+    },
+    "files": {
+      "$id": "files",
+      "properties": {
+        "targetPath": {
+          "type": "string",
+          "template": "{{tamupath (join sampleId suffix '_') false}}",
+          "watch": {
+            "sampleId": "root.sampleId",
+            "suffix": "root.suffix"
+          },
+          "propertyOrder": 3,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "sampleId": {
+          "type": "string",
+          "template": "{{sampleId}}",
+          "watch": {
+            "sampleId": "root.sampleId"
+          },
+          "propertyOrder": 2,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
+        },
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
+        },
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
+        }
+      },
+      "type": "object",
+      "title": "file",
+      "format": "grid"
+    },
+    "phases": {
+      "$id": "phases",
+      "multiple": true,
+      "properties": {
+        "Structure": {
+          "propertyOrder": 0,
+          "type": "string"
+        },
+        "a": {
+          "propertyOrder": 1,
+          "type": "string"
+        },
+        "b": {
+          "propertyOrder": 2,
+          "type": "string"
+        },
+        "c": {
+          "propertyOrder": 3,
+          "type": "string"
+        },
+        "\u03B1": {
+          "propertyOrder": 4,
+          "type": "string"
+        },
+        "\u03B2": {
+          "propertyOrder": 5,
+          "type": "string"
+        },
+        "\u03B3": {
+          "propertyOrder": 6,
+          "type": "string"
+        }
+      },
+      "title": "Phase Information",
+      "type": "object",
+      "format": "grid"
+    },
+		"date": {
+      "$id": "date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+		}
+  },
+  "description": "Form to track the XRD characterization details.",
+  "properties": {
+    "suffix": {
+      "type": "string",
+      "default": "XRD",
+      "options": {
+        "hidden": true
+      }
+    },
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath (join sampleId suffix '_') false}}",
+      "watch": {
+        "sampleId": "root.sampleId",
+        "suffix": "root.suffix"
+      },
+      "propertyOrder": 103,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+    "sampleId": {
+      "type": "string",
+      "propertyOrder": 0,
+      "format": "custom",
+      "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A or BAA01_DED-A",
+      "pattern": "([A-Z]{3}[0-9]{2})_(VAM|DED)-[A-Z]"
+    },
+    "Start Date": {
+      "$ref": "#/definitions/date",
+      "propertyOrder": 1
+    },
+    "End Date": {
+      "$ref": "#/definitions/date",
+      "propertyOrder": 2
+    },
+    "Time Spent": {
+      "description": "HH:MM",
+      "errorMessage": "Please enter a time in the HH:MM format",
+      "fieldType": "text",
+      "format": "custom",
+      "pattern": "^[0-9]+:[0-5][0-9]$",
+      "propertyOrder": 4,
+      "type": "string"
+    },
+    "Completed By": {
+      "type": "string",
+      "propertyOrder": 5
+    },
+    "XRD Process Overview": {
+      "properties": {
+        "XRD Model": {
+          "type": "string",
+          "propertyOrder": 0,
+          "enum": [
+            "TAMU",
+            "Rigaku",
+            "Anton",
+            "Panalytical"
+          ]
+        },
+        "X-ray Source": {
+          "type": "string",
+          "enum": [
+            "Cu K-\u03B1"
+          ],
+          "propertyOrder": 1
+        },
+        "Beam Voltage": {
+          "default": "40",
+          "description": "kV",
+          "propertyOrder": 2,
+          "type": "number"
+        },
+        "Beam Amperage": {
+          "description": "mA",
+          "propertyOrder": 3,
+          "type": "number"
+        },
+        "Scan Type": {
+          "type": "string",
+          "enum": [
+            "\u03B8-2\u03B8",
+            "2\u03B8-\u03C9"
+          ],
+          "propertyOrder": 4
+        },
+        "TAMU Instrument Details": {
+          "properties": {
+            "Frames": {
+              "default": "3",
+              "propertyOrder": 0,
+              "type": "number"
+            },
+            "Time per Frame": {
+              "default": "600",
+              "description": "s",
+              "propertyOrder": 1,
+              "type": "number"
+            },
+            "Theta": {
+              "default": "18.5",
+              "propertyOrder": 2,
+              "type": "number"
+            },
+            "Phi": {
+              "propertyOrder": 3,
+              "type": "number"
+            },
+            "Psi": {
+              "propertyOrder": 4,
+              "type": "number"
+            },
+            "Theta Shift per Frame": {
+              "default": "16.7",
+              "propertyOrder": 5,
+              "type": "number"
+            },
+            "Collimator": {
+              "default": "1",
+              "description": "mm",
+              "propertyOrder": 6,
+              "type": "number"
+            },
+            "Distance": {
+              "default": "19.96",
+              "description": "cm",
+              "propertyOrder": 7,
+              "type": "number"
+            },
+            "Scan Type (TAMU)": {
+              "default": "Coupled",
+              "propertyOrder": 8,
+              "type": "string"
+            },
+            "Scan Pattern": {
+              "default": "XY",
+              "propertyOrder": 9,
+              "type": "string"
+            },
+            "Results": {
+              "properties": {
+                "Phase Information": {
+                  "minItems": 1,
+                  "items": {
+                    "$ref": "#/definitions/phases"
+                  },
+                  "propertyOrder": 1,
+                  "type": "array"
+                },
+                "dataFiles": {
+                  "title": "Upload Data Files",
+                  "description": "You can select multiple files at once.",
+                  "$ref": "#/definitions/files",
+                  "propertyOrder": 2
+                },          
+                "Notes": {
+                  "type": "string",
+                  "propertyOrder": 3
+                }
+              },
+              "propertyOrder": 10,
+              "type": "object",
+              "format": "grid"
+            }
+          },
+          "options": {
+            "dependencies": {
+              "XRD Model": "TAMU"
+            }
+          }
+        },
+        "UCSD Instrument Details": {
+          "$ref": "#/definitions/ucsd",
+          "options": {
+            "dependencies": {
+              "XRD Model": [
+                "Rigaku",
+                "Anton",
+                "Panalytical"
+              ]
+            }
+          }
+        }
+      },
+      "propertyOrder": 7,
+      "type": "object",
+      "format": "grid"
+    }
+  },
+  "title": "XRD Details",
+  "type": "object"
+}
