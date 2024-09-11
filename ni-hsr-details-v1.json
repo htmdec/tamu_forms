@@ -146,7 +146,7 @@
 					"default": 1000,
 					"description": "mN"
 				},
-				"Target Ind. Strain Rate": {
+				"Target Ind Strain Rate": {
 					"propertyOrder": 4,
 					"type": "number",
 					"default": 2,
