@@ -19,6 +19,34 @@
       "options": {
         "flatpickr": {}
       }
+    },
+    "overview": {
+      "$id": "#/definitions/overview",
+      "type": "object",
+      "format": "grid",
+      "properties": {
+        "Start Date": {
+          "$ref": "#/definitions/date",
+          "propertyOrder": 0
+        },
+        "Finish Date": {
+          "$ref": "#/definitions/date",
+          "propertyOrder": 1
+        },
+        "Time Spent": {
+          "description": "HH:MM",
+          "errorMessage": "Please enter a time in the HH:MM format",
+          "fieldType": "text",
+          "format": "custom",
+          "pattern": "^[0-9]+:[0-5][0-9]$",
+          "propertyOrder": 2,
+          "type": "string"
+        },
+        "Completed By": {
+          "type": "string",
+          "propertyOrder": 3
+        }
+      }
     }
   },
   "description": "Form developed to track homogenization and forging details for the VAM process.",
@@ -53,32 +81,8 @@
     "Homogenization": {
       "properties": {
         "Process Overview": {
-          "properties": {
-            "Start Date": {
-              "$ref": "#/definitions/date",
-              "propertyOrder": 0
-            },
-            "Finish Date": {
-              "$ref": "#/definitions/date",
-              "propertyOrder": 1
-            },
-            "Time Spent": {
-              "description": "HH:MM",
-              "errorMessage": "Please enter a time in the HH:MM format",
-              "fieldType": "text",
-              "format": "custom",
-              "pattern": "^[0-9]+:[0-5][0-9]$",
-              "propertyOrder": 2,
-              "type": "string"
-            },
-            "Completed By": {
-              "type": "string",
-              "propertyOrder": 3
-            }
-          },
-          "type": "object",
-          "propertyOrder": 0,
-          "format": "grid"
+          "$ref": "#/definitions/overview",
+          "propertyOrder": 0
         },
         "Thermal Conditions": {
           "properties": {
@@ -146,31 +150,8 @@
     "Forging": {
       "properties": {
         "Process Overview": {
-          "properties": {
-            "Start Date": {
-              "$ref": "#/definitions/date",
-              "propertyOrder": 0
-            },
-            "Finish Date": {
-              "$ref": "#/definitions/date",
-              "propertyOrder": 1
-            },
-            "Time Spent": {
-              "description": "HH:MM",
-              "errorMessage": "The format must be a time as HH:MM",
-              "format": "custom",
-              "pattern": "^[0-9]+:[0-5][0-9]$",
-              "type": "string",
-              "propertyOrder": 2
-            },
-            "Completed By": {
-              "type": "string",
-              "propertyOrder": 3
-            }
-          },
-          "type": "object",
-          "propertyOrder": 0,
-          "format": "grid"
+          "$ref": "#/definitions/overview",
+          "propertyOrder": 0
         },
         "Ingot Dimensions Before": {
           "properties": {
@@ -250,14 +231,81 @@
           "type": "object",
           "propertyOrder": 5,
           "format": "grid"
+        },
+        "Process Type": {
+          "propertyOrder": 6,
+          "type": "string",
+          "default": "Rolling",
+          "enum": [
+            "Rolling"
+          ]
+        },
+        "Target Reduction": {
+          "propertyOrder": 7,
+          "type": "number",
+          "description": "%"
+        },
+        "Thickness Reduction": {
+          "propertyOrder": 8,
+          "type": "number",
+          "description": "%"
         }
       },
       "type": "object",
       "propertyOrder": 2
     },
+    "Recrystallization": {
+      "properties": {
+        "Process Overview": {
+          "$ref": "#/definitions/overview",
+          "propertyOrder": 0
+        },
+        "Temperature": {
+          "propertyOrder": 1,
+          "description": "°C",
+          "propertyOrder": 1,
+          "type": "number"
+        },
+        "Duration": {
+          "propertyOrder": 2,
+          "description": "hours",
+          "type": "number"
+        },
+        "Cooling Type": {
+          "propertyOrder": 3,
+          "type": "string",
+          "enum": [
+            "WQ"
+          ],
+          "default": "WQ"
+        },
+        "Atmosphere": {
+          "propertyOrder": 4,
+          "type": "string",
+          "enum": [
+            "Air",
+            "Ar",
+            "N2"
+          ],
+          "default": "Air"
+        },
+        "Wrapping": {
+          "propertyOrder": 5,
+          "type": "string",
+          "enum": [
+            "None",
+            "Steel"
+          ],
+          "default": "Steel"
+        }
+      },
+      "type": "object",
+      "format": "grid",
+      "propertyOrder": 3
+    },
     "Notes": {
       "type": "string",
-      "propertyOrder": 3
+      "propertyOrder": 4
     }
   },
   "title": "VAM Processing Details",
