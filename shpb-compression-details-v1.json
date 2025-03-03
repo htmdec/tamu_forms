@@ -1,64 +1,9 @@
 {
-    "description": "Form to track the split-Hopkinson pressure bar (SHPB) compression details.",
-    "definitions": {
-        "files": {
-            "$id": "#/definitions/files",
-            "properties": {
-                "targetPath": {
-                  "type": "string",
-                  "template": "{{tamupath sample false}}",
-                  "watch": {
-                    "sample": "root.sampleId"
-                  },
-                  "propertyOrder": 3,
-                  "options": {
-                    "hidden": true
-                  },
-                  "format": "hidden"
-                },
-                "sampleId": {
-                  "type": "string",
-                  "template": "{{sample}}",
-                  "watch": {
-                    "sample": "root.sampleId"
-                  },
-                  "propertyOrder": 2,
-                  "options": {
-                    "hidden": true
-                  },
-                  "format": "hidden"
-                },
-                "file": {
-                  "type": "string",
-                  "propertyOrder": 0,
-                  "title": "Upload files"
-                },
-                "button": {
-                  "title": "Browse",
-                  "format": "button",
-                  "options": {
-                    "button": {
-                      "action": "button1CB",
-                      "uploadFor": "file"
-                    }
-                  },
-                  "propertyOrder": 1
-                }
-            },
-            "type": "object",
-            "title": "file",
-            "format": "grid"
-        },
-        "date": {
-            "$id": "#/definitions/date",
-            "type": "string",
-            "format": "date",
-            "options": {
-              "flatpickr": {}
-            }
-        }
-    },
-    "properties": {
+  "description": "Form to track the split-Hopkinson pressure bar (SHPB) compression details.",
+  "definitions": {
+    "files": {
+      "$id": "#/definitions/files",
+      "properties": {
         "targetPath": {
           "type": "string",
           "template": "{{tamupath sample false}}",
@@ -72,75 +17,147 @@
           "format": "hidden"
         },
         "sampleId": {
-            "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A_SHPB_a or BAA01_VAM-A_SHPB_b",
-            "format": "custom",
-            "pattern": "(B[A-Z]{2}[0-9]{2})_(VAM|DED)-[A-Z]_SHPB_[a-z]",
-            "propertyOrder": 0,
-            "type": "string"
+          "type": "string",
+          "template": "{{sample}}",
+          "watch": {
+            "sample": "root.sampleId"
+          },
+          "propertyOrder": 2,
+          "options": {
+            "hidden": true
+          },
+          "format": "hidden"
         },
-        "Start Date": {
-            "$ref": "#/definitions/date",
-            "propertyOrder": 1
+        "file": {
+          "type": "string",
+          "propertyOrder": 0,
+          "title": "Upload files"
         },
-        "End Date": {
-            "$ref": "#/definitions/date",
-            "propertyOrder": 2
-        },
-        "Time Spent": {
-            "description": "HH:MM",
-            "errorMessage": "Please enter a time in the HH:MM format",
-            "fieldType": "text",
-            "format": "custom",
-            "pattern": "^[0-9]+:[0-5][0-9]$",
-            "propertyOrder": 4,
-            "type": "string"
-        },
-        "Completed By": {
-            "type": "string",
-            "propertyOrder": 5
-        },
-        "Sample Dimensions": {
-            "properties": {
-                "Height": {
-                    "description": "mm",
-                    "propertyOrder": 0,
-                    "type": "number"
-                },
-                "Diameter": {
-                    "description": "mm",
-                    "propertyOrder": 1,
-                    "type": "number"
-                }
-            },
-            "propertyOrder": 6,
-            "type": "object",
-            "format": "grid"
-        },
-        "Strik Bar Length": {
-            "description": "mm",
-            "propertyOrder": 7,
-            "type": "number"
-        },
-        "Gas Gun Pressure": {
-            "description": "psi",
-            "propertyOrder": 8,
-            "type": "number"
-        },
-        "Target Strain Rate": {
-            "propertyOrder": 9,
-            "type": "number"
-        },
-        "File Upload": {
-            "title": "Data Files Upload",
-            "propertyOrder": 10,
-            "description": "Please attach the data files (you can select multiple files)",
-            "$ref": "#/definitions/files"
-        },
-        "Notes": {
-            "type": "string",
-            "propertyOrder": 11
+        "button": {
+          "title": "Browse",
+          "format": "button",
+          "options": {
+            "button": {
+              "action": "button1CB",
+              "uploadFor": "file"
+            }
+          },
+          "propertyOrder": 1
         }
+      },
+      "type": "object",
+      "title": "file",
+      "format": "grid"
     },
-    "title": "Split-Hopkinson (SHPB) Compression Details",
-    "type": "object"
+    "date": {
+      "$id": "#/definitions/date",
+      "type": "string",
+      "format": "date",
+      "options": {
+        "flatpickr": {}
+      }
+    }
+  },
+  "properties": {
+    "targetPath": {
+      "type": "string",
+      "template": "{{tamupath sample false}}",
+      "watch": {
+        "sample": "root.sampleId"
+      },
+      "propertyOrder": 3,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
+    "sampleId": {
+      "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A_SHPB_a or BAA01_VAM-A_SHPB_b",
+      "format": "custom",
+      "pattern": "(B[A-Z]{2}[0-9]{2})_(VAM|DED)-[A-Z]_SHPB_[a-z]",
+      "propertyOrder": 0,
+      "type": "string"
+    },
+    "Start Date": {
+      "$ref": "#/definitions/date",
+      "propertyOrder": 1
+    },
+    "End Date": {
+      "$ref": "#/definitions/date",
+      "propertyOrder": 2
+    },
+    "Time Spent": {
+      "description": "HH:MM",
+      "errorMessage": "Please enter a time in the HH:MM format",
+      "fieldType": "text",
+      "format": "custom",
+      "pattern": "^[0-9]+:[0-5][0-9]$",
+      "propertyOrder": 4,
+      "type": "string"
+    },
+    "Completed By": {
+      "type": "string",
+      "propertyOrder": 5
+    },
+    "Sample Dimensions": {
+      "properties": {
+        "Height": {
+          "description": "mm",
+          "propertyOrder": 0,
+          "type": "number"
+        },
+        "Diameter": {
+          "description": "mm",
+          "propertyOrder": 1,
+          "type": "number"
+        }
+      },
+      "propertyOrder": 6,
+      "type": "object",
+      "format": "grid"
+    },
+    "Striker Bar Length": {
+      "description": "mm",
+      "propertyOrder": 7,
+      "type": "number"
+    },
+    "Gas Gun Pressure": {
+      "description": "psi",
+      "propertyOrder": 8,
+      "type": "number"
+    },
+    "Target Strain Rate": {
+      "propertyOrder": 9,
+      "type": "number"
+    },
+    "Target Strain": {
+      "propertyOrder": 10,
+      "type": "number"
+    },
+    "Momentum Trap Gap": {
+      "description": "mm",
+      "propertyOrder": 11,
+      "type": "number"
+    },
+    "File Upload": {
+      "title": "Data Files Upload",
+      "propertyOrder": 12,
+      "description": "Please attach the data files (you can select multiple files)",
+      "$ref": "#/definitions/files"
+    },
+    "Notes": {
+      "type": "string",
+      "propertyOrder": 11
+    },
+    "suffix": {
+      "type": "string",
+      "default": "SHPB",
+      "options": {
+        "hidden": true
+      },
+      "propertyOrder": 13
+    }
+  },
+  "title": "Split-Hopkinson (SHPB) Compression Details",
+  "type": "object"
 }
