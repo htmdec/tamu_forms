@@ -42,40 +42,135 @@
       "propertyOrder": 0,
       "format": "grid"
      },
+     "elements": {
+       "propertyOrder": 1,
+       "type": "object",
+       "format": "grid-strict",
+       "properties": {
+         "Al": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 0
+         },
+         "Co": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 1
+         },
+         "Cr": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 2
+         },
+         "Cu": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 3
+         },
+         "Fe": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 4
+         },
+         "Mn": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 5
+         },
+         "Ni": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 6
+         },
+         "V": {
+           "type": "boolean",
+           "format": "checkbox",
+           "propertyOrder": 7
+         }
+       }
+     },
      "Target Mass": {
       "description": "grams",
       "properties": {
        "Al": {
         "propertyOrder": 0,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Al": true
+          }
+        }
        },
        "Co": {
         "propertyOrder": 5,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Co": true
+          }
+        }
        },
        "Cr": {
         "propertyOrder": 2,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Cr": true
+          }
+        }
        },
        "Cu": {
         "propertyOrder": 7,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Cu": true
+          }
+        }
        },
        "Fe": {
         "propertyOrder": 4,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Fe": true
+          }
+        }
        },
        "Mn": {
         "propertyOrder": 3,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Mn": true
+          }
+        }
        },
        "Ni": {
         "propertyOrder": 6,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Ni": true
+          }
+        }
        },
        "V": {
         "propertyOrder": 1,
-        "type": "number"
+        "type": "number",
+        "default": 0,
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.V": true
+          }
+        }
        },
        "Total": {
         "type": "string",
@@ -94,43 +189,83 @@
        }
       },
       "type": "object",
-      "propertyOrder": 1,
-      "format": "grid"
+      "propertyOrder": 2,
+      "format": "grid-strict"
      },
      "Weighed Mass": {
       "description": "grams",
       "properties": {
        "Al": {
         "propertyOrder": 0,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Al": true
+          }
+        }
        },
        "Co": {
         "propertyOrder": 5,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Co": true
+          }
+        }
        },
        "Cr": {
         "propertyOrder": 2,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Cr": true
+          }
+        }
        },
        "Cu": {
         "propertyOrder": 7,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Cu": true
+          }
+        }
        },
        "Fe": {
         "propertyOrder": 4,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Fe": true
+          }
+        }
        },
        "Mn": {
         "propertyOrder": 3,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Mn": true
+          }
+        }
        },
        "Ni": {
         "propertyOrder": 6,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.Ni": true
+          }
+        }
        },
        "V": {
         "propertyOrder": 1,
-        "type": "number"
+        "type": "number",
+        "options": {
+          "dependencies": {
+            "root.Material Preparation.elements.V": true
+          }
+        }
        },
        "Total": {
         "type": "string",
@@ -150,7 +285,7 @@
       },
       "type": "object",
       "propertyOrder": 2,
-      "format": "grid"
+      "format": "grid-strict"
      }
     }
    },
@@ -235,7 +370,7 @@
       "propertyOrder": 4,
       "format": "grid"
      },
-     "3 Part Sections": {
+     "3-Parts Pre-Mn Melting": {
       "properties": {
        "1": {
         "properyOrder": 0,
@@ -252,6 +387,32 @@
       },
       "type": "object",
       "propertyOrder": 2,
+      "format": "grid",
+      "description": "amps",
+      "propertyOrder": 5,
+      "options": {
+        "dependencies": {
+          "root.Material Preparation.elements.Mn": true
+        }
+      }
+     },
+     "3 Part Sections": {
+      "properties": {
+       "1": {
+        "properyOrder": 0,
+        "type": "number"
+       },
+       "2": {
+        "properyOrder": 1,
+        "type": "number"
+       },
+       "3": {
+        "properyOrder": 2,
+        "type": "number"
+       }
+      },
+      "type": "object",
+      "propertyOrder": 6,
       "format": "grid",
       "description": "amps"
      },
@@ -287,11 +448,25 @@
        }
       },
       "type": "object",
-      "propertyOrder": 3,
+      "propertyOrder": 7,
       "format": "grid",
       "description": "amps"
+     },
+     "Surface": {
+       "type": "object",
+       "format": "grid",
+       "propertyOrder": 3,
+       "description": "amps",
+       "propertyOrder": 8,
+       "properties": {
+         "1": {
+           "propertyOrder": 0,
+           "type": "number",
+           "default": 0
+          }
+        }
+       }
      }
-    }
    },
     "suffix": {
       "type": "string",
@@ -323,7 +498,7 @@
 
    "Notes": {
     "type": "string",
-    "propertyOrder": 5
+    "propertyOrder": 9
    }
   },
   "title": "VAM Synthesis Details",
