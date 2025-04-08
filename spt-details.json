@@ -187,12 +187,12 @@
     },
     "status": {
       "type": "string",
-      "title": "Status",
+      "title": "Testing Status",
       "enum": [
         "Waiting to be Tested",
         "Measurement Required",
         "Ineligible for Testing",
-        "Tested"
+        "Test Complete"
       ],
       "default": "Waiting to be Tested"
     }
