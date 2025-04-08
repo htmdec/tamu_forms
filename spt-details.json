@@ -1,0 +1,202 @@
+{
+  "description": "Form to track the SPT (Small Punch Test) details.",
+  "definitions": {
+    "gritFace": {
+      "format": "grid",
+      "type": "object",
+      "title": "Phase",
+      "properties": {
+        "grit": {
+          "type": "string",
+          "title": "Grit",
+          "enum": [
+            "800",
+            "1200",
+            "2400"
+          ],
+          "options": {
+            "grid_columns": 2
+          }
+        },
+        "face": {
+          "type": "string",
+          "title": "Face",
+          "enum": [
+            "1",
+            "2"
+          ],
+          "options": {
+            "grid_columns": 2
+          }
+        },
+        "time": {
+          "type": "number",
+          "title": "Time (min)",
+          "default": 1,
+          "options": {
+            "grid_columns": 2
+          }
+        }
+      }
+    }
+  },
+  "properties": {
+    "polishingRegime": {
+      "format": "grid",
+      "properties": {
+        "indenterRadius": {
+          "type": "number",
+          "title": "Indenter Radius (mm)",
+          "default": 1.225,
+          "options": {
+            "grid_columns": 2
+          }
+        },
+        "loadSpeed": {
+          "type": "number",
+          "title": "Speed of Load Application (mm/min)",
+          "default": 0.5,
+          "options": {
+            "grid_columns": 2
+          }
+        },
+        "resilience": {
+          "type": "number",
+          "title": "Resilience of the machine (μm/N)",
+          "default": 0.0049679,
+          "options": {
+            "grid_columns": 4
+          }
+        },
+        "shutdownThreshold": {
+          "type": "number",
+          "title": "Force shutdown Threshold (%Fmax)",
+          "default": 20,
+          "options": {
+            "grid_columns": 2
+          }
+        },
+        "pointLoad": {
+          "type": "number",
+          "title": "Point of load application (mm)",
+          "default": 2,
+          "options": {
+            "grid_columns": 2
+          }
+        },
+        "gritFace": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/gritFace"
+          },
+          "title": "Polishing Phases",
+          "options": {
+            "grid_columns": 12
+          }
+        }
+      },
+      "type": "object",
+      "title": "Polishing Regime"
+    },
+    "sampleId": {
+      "type": "string",
+      "title": "Sample ID"
+    },
+    "width": {
+      "type": "number",
+      "title": "Width (cm)",
+      "default": 1
+    },
+    "initialThickness": {
+      "type": "array",
+      "title": "Initial Thickness (mm)",
+      "items": {
+        "type": "number"
+      },
+      "maxItems": 5,
+      "options": {
+        "grid_columns": 2
+      }
+    },
+    "initialAvgThickness": {
+      "type": "number",
+      "title": "Initial Thickness Average (mm)",
+      "default": 0.5,
+      "options": {
+        "grid_columns": 2
+      }
+    },
+    "polished": {
+      "type": "boolean",
+      "title": "Polishing Status",
+      "format": "checkbox",
+      "default": false
+    },
+    "finalThickness": {
+      "type": "array",
+      "title": "Final Thickness (mm)",
+      "maxItems": 5,
+      "items": {
+        "type": "number"
+      }
+    },
+    "finalAvgThickness": {
+      "type": "number",
+      "title": "Final Thickness Average (mm)",
+      "default": 0.5,
+      "options": {
+        "grid_columns": 2
+      }
+    },
+    "mass": {
+      "type": "number",
+      "title": "Mass (g)"
+    },
+    "density": {
+      "type": "number",
+      "title": "Density (g/cm³)",
+      "template": "{{divide mass (multiply width (divide thickness 10))}}",
+      "watch": {
+        "mass": "mass",
+        "width": "width",
+        "thickness": "finalAvgThickness"
+      },
+      "readonly": true
+    },
+    "edsDensity": {
+      "type": "number",
+      "title": "EDS REF Density (g/cm³)"
+    },
+    "densityDeviation": {
+      "type": "number",
+      "title": "Deviation (%)",
+      "template": "{{multiply (divide (subtract edsDensity density) edsDensity) 100}}",
+      "watch": {
+        "density": "density",
+        "edsDensity": "edsDensity"
+      },
+      "readonly": true
+    },
+    "notes": {
+      "type": "string",
+      "title": "Notes"
+    },
+    "photoLink": {
+      "type": "string",
+      "title": "Photo Link"
+    },
+    "status": {
+      "type": "string",
+      "title": "Status",
+      "enum": [
+        "Waiting to be Tested",
+        "Measurement Required",
+        "Ineligible for Testing",
+        "Tested"
+      ],
+      "default": "Waiting to be Tested"
+    }
+  },
+  "title": "Small Punch Test Details",
+  "type": "object"
+}
