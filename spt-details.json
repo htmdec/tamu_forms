@@ -41,6 +41,19 @@
     }
   },
   "properties": {
+    "targetPath": {
+      "type": "string",
+      "title": "Target Path (hidden)",
+      "template": "{{tamupath sample false}}",
+      "watch": {
+        "sample": "root.sampleId"
+      },
+      "propertyOrder": -1,
+      "options": {
+        "hidden": true
+      },
+      "format": "hidden"
+    },
     "polishingRegime": {
       "format": "grid",
       "properties": {
