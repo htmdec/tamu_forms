@@ -74,7 +74,7 @@
     "sampleId": {
       "errorMessage": "Please enter a Sample ID such as BAA01_VAM-A_SHPB_a or BAA01_VAM-A_SHPB_b",
       "format": "custom",
-      "pattern": "(B[A-Z]{2}[0-9]{2})_(VAM|DED)-[A-Z]_SHPB_[a-z]",
+      "pattern": "([A-Z]{3}[0-9]{2})_(VAM|DED)-[A-Z]_SHPB_[a-z]",
       "propertyOrder": 0,
       "type": "string"
     },
