@@ -173,7 +173,7 @@
         }
        },
        "Total": {
-        "type": "string",
+        "type": "number",
         "title": "Total",
         "template": "{{{add Cu (add Mn (add Fe (add Ni (add Co (add Cr (add V Al))))))}}}",
         "watch": {
@@ -268,7 +268,7 @@
         }
        },
        "Total": {
-        "type": "string",
+        "type": "number",
         "title": "Total",
         "template": "{{{add Cu (add Mn (add Fe (add Ni (add Co (add Cr (add V Al))))))}}}",
         "watch": {
