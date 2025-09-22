@@ -137,7 +137,7 @@
           "type": "number"
         },
         "Area": {
-          "type": "string",
+          "type": "number",
           "propertyOrder": 3,
           "template": "{{multiply Width Thickness}}",
           "watch": {
@@ -162,8 +162,8 @@
           "propertyOrder": 1,
           "type": "number"
         },
-        "My Max Stress": {
-          "type": "string",
+        "Max Stress": {
+          "type": "number",
           "propertyOrder": 2,
           "template": "{{divide Force (multiply Width Thickness)}}",
           "watch": {
@@ -205,7 +205,7 @@
           "propertyOrder": 4
         },
         "UTS/YS Ratio": {
-          "type": "string",
+          "type": "number",
           "propertyOrder": 5,
           "template": "{{divide UTS YS}}",
           "watch": {
